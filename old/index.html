@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <script src="2004dwm.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/7.css">
+        <title>Twisty Nado</title>
+        <style>
+            @font-face {
+                font-family: "notsegoeui";
+                src: url("notsegoeui.ttf");
+            }
+            
+            html, body{
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                font-family: 'notsegoeui';
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+            }
+
+            .nowp{
+                background-color: #fff;
+                transition: ease-in 1s;
+            }
+
+            .wp0{
+                background-image: url("wp.jpeg");
+                transition: ease-in 1s;
+            }
+
+            .wp1{
+                background-image: url("wp2.jpeg");
+                transition: ease-in 1s;
+            }
+            
+            .wp2{
+                background-image: url("wp3.jpeg");
+                transition: ease-in 1s;
+            }
+
+            .wp3{
+                background-image: url("wp4.jpeg");
+                transition: ease-in 1s;
+            }
+
+            .wp4{
+                background-image: url("wp5.jpeg");
+                transition: ease-in 1s;
+            }
+
+            .back{
+                padding: 4px;
+                text-align: center;
+            }
+
+            .button{
+                margin: 4px;
+            }
+
+            .taskbar2{
+                width: 100%;
+                height: 40px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                background-color: rgba(162, 177, 199, 0.6);
+                border-top: solid 1px #0d1116;
+                backdrop-filter: blur(2px);
+            }
+
+            .taskbar-inner{
+                width: 100%;
+                height: 39px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: rgba(0,0,0,0);
+                border-top: solid 1px #e7ebf1;
+            }
+        </style>
+    </head>
+    <body style="text-align: center" class="wp0" onload="makeinfobox()">
+      <script>
+        function makepaintbox(){
+            var newbox = new box({
+              title: "paint",
+              url: "https://jspaint.app",
+              x: "center",
+              y: "center",
+              width: "800px",
+              height: "600px",
+                class: ["smalltitle", "longertitle"],
+                onclose: function(force){
+                        return !force && !windowClose(this.id, newbox);
+                },
+            });
+        }
+
+          function makeinfobox(){
+            var newbox = new box({
+              title: "info",
+              html: '<div class="back"><h2>THIS IS A FILLER WEBSITE!</h2><h4>THE FULL WEBSITE COMES OUT ON THE 09/06/2023 (MM/DD/YYYY)</h4><h5>CREDIT TO KIPPA FOR BETA TESTING AND BACKGROUNDS</h5><button onclick="makepaintbox()" class="button">OPEN MSPAINT</button><button onclick="chrome()" class="button">OPEN CHROME</button><button onclick="errorRAM()" class="button">OPEN ERROR</button></div>',
+              x: "center",
+              y: "64px",
+              width: "980px",
+              height: "302px",
+                class: ["winver", "no-min", "no-max", "no-resize", "smalltitle", "longertitle"],
+                onclose: function(force){
+                        return !force && !windowClose(this.id, newbox);
+                },
+            });
+        }
+
+          function errorRAM(){
+                var error = new Audio("sounds/Windows Exclamation.wav");
+                error.play()
+
+                var newbox = new box("Microhard Windows", {
+                    html: '<img src="shell32/shell32_161.ico" draggable="false" style="position: absolute; width: 36px; height: 36px; margin: 10px"><h2 class="instruction instruction-primary" style="margin: 10px; position: relative; left: 48px; width: 260px">Your computer is low on memory</h2><p style="margin: 10px; position: relative; left: 48px; width: 260px">To restore enough memory for programs to work correctly, save your files and then close or restart all open programs.</p><footer style="text-align: right; position: absolute; bottom: 0; background-color: #eeeeee; width: 100%; height: 44px"><button style="position: relative; top: 10px; right: 10px">The other unfortunately broken OK button</button></footer>',
+                    x: "center",
+                    y: "center",
+                    width: "350",
+                    height: "180",
+                    icon: "shell32/shell32_161.ico",
+                    class: ["ramError", "no-min", "no-max", "no-resize", "smalltitle", "longertitle"],
+                    onclose: function(force){
+                        return !force && !windowClose(this.id, newbox);
+                    },
+                });
+            }
+
+            function chrome(){
+                var newbox = new box(" ", {
+                    url: "google.html",
+                    x: "center",
+                    y: "center",
+                    width: "1000",
+                    height: "600",
+                    class: ["chrome", "longertitle"],
+                    onclose: function(force){
+                        return !force && !windowClose(this.id, newbox);
+                    },
+                });
+                newbox.addControl({
+                    index: 0,
+                    class: "b-tab",
+                    image: "tab.png",
+                });
+                newbox.addControl({
+                    index: 0,
+                    class: "b-newtab",
+                    image: "newtab.png",
+                    click: function(){
+                        errorRAM()
+                        newbox.close()
+                    }
+                });
+            }
+
+         var currentWP = 0;
+        var wpCycle = true;
+
+         setInterval(function () {
+             if (wpCycle == true){
+                 if (currentWP == 0)
+                 {
+                    currentWP = 1;
+                    document.body.className = "wp1";
+                 } else if (currentWP == 1){
+                    currentWP = 2;
+                    document.body.className = "wp2";
+                 } else if (currentWP == 2){
+                    currentWP = 3;
+                    document.body.className = "wp3";
+                 } else if (currentWP == 3){
+                    currentWP = 4;
+                    document.body.className = "wp4";
+                 } else if (currentWP == 4){
+                    currentWP = 0;
+                    document.body.className = "wp0";
+                 }
+             } else{
+                 currentWP = 0;
+                document.body.className = "nowp";
+             }
+         }, 5000); 
+
+          function windowClose(id, box){
+                document.getElementById(id).style.animation = "windowclose .4s";
+                setTimeout(() => {
+                    box.close(true);
+                }, 300);
+            }
+      </script>
+        <div class="taskbar2">
+            <div class="taskbar-inner">
+
+            </div>
+        </div>
+        <button onclick="wpCycle = false">wpcyc</button>
+    </body>
+</html>
