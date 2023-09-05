@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TGVRP</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <style>
+
+
+
+        #loginpage{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: calc(100% - 32px);
+            height: calc(100% - 32px);
+            color: white;
+            background: linear-gradient(0deg, hsla(266, 75%, 55%, 1) 0%, hsla(340, 47%, 77%, 1) 100%);
+            padding: 16px;
+            z-index: 6969;
+        }
+
+        .noscroll{
+            overflow: hidden;
+        }
+
+        .hide{
+            display: none;
+        }
+
+        html{
+            background: linear-gradient(180deg, hsla(266, 75%, 55%, 1) 0%, hsla(340, 47%, 77%, 1) 100%);
+            background-attachment: fixed;
+            margin: 0;
+            padding: 16px;
+            left: 0;
+            top: 0;
+            width: calc(100% - 32px);
+            height: calc(100% - 32px);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            scrollbar-color: hsla(266, 75%, 55%, 1) hsla(340, 47%, 77%, 1);
+        }
+
+        #item{
+            border: outset 4px;
+            min-height: 256px;
+            padding-left: 16px;
+            margin-top: 16px;
+        }
+
+        button{
+            border: outset 2px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        input{
+            border: outset 2px;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+    </style>
+</head>
+
+<body class="noscroll">
+    <div id="loginpage">
+        <h1>TGVRP SECRET SITE</h1>
+        <input type="" placeholder="LOGIN" id="loginT">
+        <br>
+        <br>
+        <input type="password" placeholder="PASSWORD" id="passwordT">
+        <button id="login" onclick="loginClick(document.getElementById('loginT'), document.getElementById('passwordT'), document.getElementById('loginpage'))">&nbsp>&nbsp</button>
+    </div>
+    <div id="item">
+        <h1>IDs (Click to open)</h1>
+        <img src="img/id/harleyidFIX.png" width="384" height="256" onclick="window.open('img/id/harleyidFIX.png')">
+        <img src="img/id/joshidFIX.png" width="384" height="256" onclick="window.open('img/id/joshidFIX.png')">
+        <img src="img/id/twistyidFIX.png" width="384" height="256" onclick="window.open('img/id/twistyidFIX.png')">
+        <img src="img/id/twistyidFIXF.png" width="384" height="256" onclick="window.open('img/id/twistyidFIXF.png')">
+    </div>
+    <div id="item">
+        <h1>Twisty's Terrible Tech Products</h1>
+        <ul>
+            <li>PearPhone 13</li>
+            <li>PearPhone 13 Pro</li>
+            <li>PearPhone 14</li>
+            <li>PearPhone 14 Pro</li>
+            <li>PearBook Air</li>
+            <li>PearBook Pro</li>
+            <li>TwistyBook Slim</li>
+            <li>TwistyBook Slim X</li>
+            <li>TwistyBook Pro</li>
+            <li>TwistyBook Pro X</li>
+            <li>TwistyPhone X</li>
+            <li>TwistyPhone XS</li>
+        </ul>
+    </div>
+    <div id="item">
+        <h1>Discord Server</h1>
+        <a href="https://discord.gg/7XRqBupDc6">https://discord.gg/7XRqBupDc6</a>
+        <br>
+        <iframe src="https://discord.com/widget?id=1133044636332601394&theme=dark" width="500" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+    </div>
+</body>
+
+<script>
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+
+    function loginClick(l, p, lo){
+        if (l.value == "tgvrp" && p.value == "gvrp") {
+            console.debug("correct");
+            lo.classList.add("hide")
+            document.body.classList.remove("noscroll")
+        } else{
+            console.warn("incorrect");
+        }
+    }
+
+</script>
+
+</html>
