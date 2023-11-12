@@ -27,6 +27,37 @@
         document.getElementById("taskbar").appendChild(button)
     }
 
+    var savedInnerWidth = 0
+    var savedInnerHeight = 0
+
+    setInterval(() => {
+        savedInnerWidth = innerWidth
+        savedInnerHeight = innerHeight
+    }, 500);
+
+    function resize(){
+
+        if (innerWidth >= savedInnerWidth) {
+            var audio = new Audio("Assets/insert.wav")
+            audio.play()
+            document.getElementById("bs").style.display = "block"
+            setTimeout(() => {
+                document.getElementById("bs").style.display = "none"
+            }, 1000);
+        } else {
+            var audio = new Audio("Assets/remove.wav")
+            audio.play()
+            document.getElementById("bs").style.display = "block"
+            setTimeout(() => {
+                document.getElementById("bs").style.display = "none"
+            }, 1000);
+        }
+    }
+
+    function fullscreen(){
+        document.documentElement.requestFullscreen();
+    }
+
     function time(){
         const d = new Date();
         const h = d.getHours()
@@ -174,7 +205,7 @@
     }
 </script>
 
-<body onload="time(); if (devMode == false) { oobe() }">
+<body onload="time(); if (devMode == false) { oobe() }" onresize="resize()">
     <div id="oobe">
         <div class="app-loader-busy animate" style="left: 50%; top: 50%; transform: translate(-50%,-50%); width: 128px; height: 128px; position: absolute; color: white;">
             <svg viewBox="0 0 16 16"><circle class="app-ldr-busy" cx="8px" cy="8px" r="7px"></circle></svg>
@@ -183,6 +214,7 @@
             <source src="Assets/start.mp4" type="video/mp4">
         </video>
     </div>
+    <div id="bs"></div>
     <div id="windows">
         <div class="start" id="start">
             <input type="text" placeholder="   Search for apps, settings and documents" class="search">
@@ -191,6 +223,7 @@
                 <button class="startItem" onclick="nameWindow(); closeStart()"><br><br><br>Change Username</button>
                 <button class="startItem ieS" onclick="edge(); closeStart()" ><br><br><br>Edge</button>
                 <button class="startItem pyS" onclick="python(); closeStart()" ><br><br><br>Python</button>
+                <button class="startItem" onclick="fullscreen(); closeStart()"><br><br><br>Fullscreen</button>
             </div>
             <div class="startBottom">
                 <button draggable="false" class="userIcon" onclick="nameWindow(); closeStart()"><img src="Assets/user.png" draggable="false" style="width: 32px; height: 32px; border-radius: 100%;">&nbsp<p id="username" style="font-size: 12px; font-family: 'Pixelated MS Sans Serif';">user</p></button>
