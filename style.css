@@ -1,0 +1,663 @@
+@font-face {
+    font-family: "Pixelated MS Sans Serif";
+    src: url("Assets/segoeuivar.ttf");
+}
+
+@keyframes openWindow{
+    from{
+        opacity: 0;
+        transform: scale(87%);
+    }
+    to{
+        opacity: 1;
+        transform: scale(100%);
+    }
+}
+
+@keyframes closeWindow{
+    from{
+        opacity: 1;
+        transform: scale(100%);
+    }
+    to{
+        opacity: 0;
+        transform: scale(87%);
+    }
+}
+
+@keyframes openStart{
+    from{
+        bottom: -650px;
+    }
+    to{
+        bottom: 56px;
+    }
+}
+
+@keyframes closeStart{
+    from{
+        bottom: 56px;
+    }
+    to{
+        bottom: -650px;
+    }
+}
+
+body, head, html{
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: rgb(0, 0, 0);
+    background-image: url("Assets/img0.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    user-select: none;
+    font-family: "Pixelated MS Sans Serif";
+    color: black;
+    color-scheme: light;
+}
+
+.start{
+    overflow: hidden;
+}
+
+:root {
+    --PrimaryColor: #0078D7;
+    --PrimaryColorLight: #60CDFF;
+}
+
+.winbox:not(.max) .wb-header {
+    cursor: default;
+    height: 30px;
+    line-height: 20px;
+    font-family: "Pixelated MS Sans Serif";
+    background: #ffffff00;
+    font-size: 16px;
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.wb-header {
+    cursor: default;
+    background: #ffffff00;
+    height: 24px;
+    line-height: 20px;
+    font-family: "Pixelated MS Sans Serif";
+    font-size: 16px;
+    width: 100%;
+    margin: 0px;
+}
+
+.winbox:not(.max) .wb-header{
+    height: 30px;
+}
+
+.wb-icon{
+    width: 24px;
+    height: 24px;
+    cursor: default;
+    margin-top: 2px;
+    left: -4px;
+    position: relative;
+}
+
+
+.wb-drag {
+    cursor: default;
+}
+
+.wb-title {
+    cursor: default;
+    height: 24px;
+    line-height: 24px;
+    font-family: "Pixelated MS Sans Serif", Arial;
+    font-size: 12px;
+    left: -4px;
+    color: black;
+    position: relative;
+}
+
+.winbox:not(.max) .wb-title{
+    height: 30px;
+    line-height: 30px;
+}
+
+.winbox:not(.max) .wb-title {
+    cursor: default;
+    height: 30px;
+    line-height: 30px;
+    font-family: "Pixelated MS Sans Serif", Arial;
+}
+
+.winbox:not(.max) .wb-body {
+    top: 30px;
+    background-color: #f0f0f0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.wb-body {
+    top: 24px;
+    margin: 0px;
+    background-color: #f0f0f0;
+    color: black;
+}
+
+.winbox:not(.max) .wb-body{
+    top: 30px;
+}
+
+.winbox:not(.max) {
+    background: rgba(228, 228, 228, 0.9);
+    backdrop-filter: blur(64px);
+    border-radius: 8px;
+}
+
+.wb-close {
+    width: 45px;
+    height: 24px;
+    background-image: url("Assets/icons/icn_close_b.png");
+    background-position: center;
+    background-size: 32px;
+    margin-right: 0px;
+    margin-top: 0px;
+    transition: .25s;
+}
+
+.wb-close:hover {
+    background-color: #e81123;
+    background-image: url("Assets/icons/icn_close.png");
+    opacity: 1;
+}
+
+.wb-min:hover {
+    background-color: #adadad2d;
+    opacity: 1;
+}
+
+.wb-max:hover {
+    background-color: #adadad2d;
+    opacity: 1;
+}
+
+.winbox:not(.max) .wb-close{
+    height: 30px;
+}
+
+.winbox:not(.max) .wb-max{
+    height: 30px;
+}
+
+.winbox:not(.max) .wb-min{
+    height: 30px;
+}
+
+.winbox:not(.max) .wb-max {
+    width: 45px;
+    height: 30px;
+    background-image: url("Assets/icons/icn_max_b.png");
+    background-position: center;
+    background-size: 32px;
+    margin-right: 0px;
+    margin-top: 0px;
+}
+
+.winbox:not(.focus) .wb-header {
+    background: #e6e6e6;
+}
+
+.winbox:not(.focus) .wb-close{
+    opacity: 0.3;
+}
+
+.winbox:not(.focus) .wb-max{
+    opacity: 0.3;
+}
+
+.winbox:not(.focus) .wb-min{
+    opacity: 0.3;
+}
+
+.winbox:not(.focus) .wb-title{
+    opacity: 0.5;
+}
+
+.wb-max {
+    width: 45px;
+    height: 24px;
+    background-image: url("Assets/icons/icn_res_b.png");
+    background-position: center;
+    background-size: 32px;
+    margin-right: 0px;
+    margin-top: 0px;
+    transition: .25s;
+}
+
+.wb-min {
+    width: 45px;
+    height: 24px;
+    background-image: url("Assets/icons/icn_min_b.png");
+    background-position: center;
+    background-size: 32px;
+    margin-right: 0px;
+    margin-top: 0px;
+    transition: .25s;
+}
+
+.invisible{
+    visibility: visible;
+}
+
+.wb-border{
+    width: calc(100% - 3px);
+    height: calc(100% - 3px);
+    outline: none;
+    outline-color: invert;
+    visibility: visible;
+}
+
+.winbox:not(.invisible) .wb-border {
+    visibility: visible;
+}
+
+.winbox{
+    background-color: #fff;
+    box-shadow: 0 14px 28px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22);
+    animation: openWindow .2s;
+}
+
+.winbox:not(.max){
+    border: 1px solid #444444;
+}
+
+.winbox:not(.focus){
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.125),0 10px 10px rgba(0,0,0,.11);
+}
+
+.backstore{
+    visibility: hidden;
+}
+
+.taskbar{
+    width: 100%;
+    height: 48px;
+    background-color: rgba(228, 228, 228, 0.9);
+    backdrop-filter: blur(64px);
+    position: absolute;
+    text-align: center;
+    border-top: 1px solid #757575;
+    bottom: 0;
+    z-index: 1000000000;
+}
+
+.start{
+    width: 550px;
+    height: 650px;
+    background: rgba(228, 228, 228, 0.9);
+    backdrop-filter: blur(64px);
+    border: 1px solid #757575;
+    border-radius: 8px;
+    position: absolute;
+    bottom: 58px;
+    left: calc(50% - 275px);
+    color: black;
+    display: none;
+    z-index: 100000000;
+}
+
+.startBottom{
+    position: absolute;
+    background: rgba(0, 0, 0, 0.03);
+    border-top: solid 1px #b7bac4;
+    width: 100%;
+    height: 60px;
+    bottom: 0px;
+    left: 0px;
+}
+
+.shutdownButton{
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    background-image: url("Assets/shutdownIcon.png");
+    background-size: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 48px;
+    bottom: 10px;
+    cursor: default;
+    transition: .2s;
+}
+
+.shutdownButton:hover{
+    background: rgba(255, 255, 255, 0.6);
+    background-image: url("Assets/shutdownIcon.png");
+    background-size: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.userIcon{
+    min-width: 80px;
+    height: 40px;
+    background: none;
+    border: none;
+    position: absolute;
+    left: 48px;
+    bottom: 10px;
+    cursor: default;
+    font-family: "Pixelated MS Sans Serif";
+    font-size: 12px;
+    transition: .2s;
+}
+
+.userIcon:hover{
+    background: rgba(255, 255, 255, 0.6);
+}
+
+
+.taskbarButton{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-top: 4px;
+    background: none;
+    border: none;
+    cursor: default;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url("Assets/icons/icons/imageres_15.ico");
+    background-size: 23px;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: .1s;
+}
+
+.taskbarButton:hover{
+    background: rgba(255, 255, 255, 0.6);
+    background-image: url("Assets/icons/icons/imageres_15.ico");
+    background-size: 23px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.taskbarButton:active{
+    background-size: 19px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.startButton{
+    background-image: url("Assets/sb.png");
+    background-size: 23px;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: .1s;
+}
+
+.startButton:hover{
+    background-image: url("Assets/sb.png");
+    background-size: 23px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.startButton:active{
+    background-image: url("Assets/sb.png");
+    background-size: 19px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.sbActive{
+    background: rgba(255, 255, 255, 0.6);
+    background-image: url("Assets/sb.png");
+    background-size: 23px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.ie{
+    background-image: url("Assets/edge.ico");
+    background-size: 23px;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: .1s;
+}
+
+.ie:hover{
+    background-image: url("Assets/edge.ico");
+    background-size: 23px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.ie:active{
+    background-image: url("Assets/edge.ico");
+    background-size: 19px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.py{
+    background-image: url("Assets/python.ico");
+    background-size: 23px;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: .1s;
+}
+
+.py:hover{
+    background-image: url("Assets/python.ico");
+    background-size: 23px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.py:active{
+    background-image: url("Assets/python.ico");
+    background-size: 19px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.winbox:not(.normalTitle) .wb-header{
+    height: 40px;
+}
+
+.winbox:not(.normalTitle) .wb-body{
+    top: 40px;
+}
+
+.winbox:not(.lightTitle){
+    background: #202020;
+    color: white;
+}
+
+.winbox:not(.lightTitle) .wb-title{
+    color: white;
+}
+
+.winbox:not(.lightTitle):not(.focus) .wb-header{
+    background: #202020;
+    color: white;
+}
+
+.winbox:not(.lightTitle) .wb-close{
+    background-image: url("Assets/icons/icn_close.png");
+}
+
+.winbox:not(.lightTitle):not(.max) .wb-max{
+    background-image: url("Assets/icons/icn_max.png");
+}
+
+.winbox:not(.lightTitle) .wb-max{
+    background-image: url("Assets/icons/icn_res.png");
+}
+
+.winbox:not(.lightTitle) .wb-min{
+    background-image: url("Assets/icons/icn_min.png");
+}
+
+.wb-tab{
+    width: 340px;
+    height: 33px;
+    position: absolute;
+    left:12px;
+    bottom:0;
+    cursor: default;
+}
+
+#windows{
+    display: block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#oobe{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+#oobeVideo{
+    background-color: black;
+    display: none;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#time{
+    position: absolute;
+    font-size: 12px;
+    line-height: 14px;
+    top: -4px;
+    right: 16px;
+    text-align: right;
+}
+
+.pinnedItems{
+    position: absolute;
+    background: none;
+    padding: 40px;
+    padding-top: 60px;
+    width: 100%;
+    height: 40%;
+    top: 0px;
+    left: 0px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.startItem{
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 90px;
+    margin-top: 4px;
+    background: none;
+    border: none;
+    cursor: default;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url("Assets/icons/icons/imageres_15.ico");
+    background-size: 46px;
+    background-position: center 10px;
+    background-repeat: no-repeat;
+    font-size: 12px;
+    vertical-align: top;
+    transition: .1s;
+}
+
+.startItem:hover{
+    background: rgba(255, 255, 255, 0.6);
+    background-image: url("Assets/icons/icons/imageres_15.ico");
+    background-size: 46px;
+    background-position: center 10px;
+    background-repeat: no-repeat;
+}
+
+.startItem:active{
+    background-size: 38px;
+    background-position: center 15px;
+    background-repeat: no-repeat;
+}
+
+.ieS{
+    background-image: url("Assets/edge.ico");
+    background-size: 46px;
+    background-position: center 10px;
+    background-repeat: no-repeat;
+    transition: .1s;
+}
+
+.ieS:hover{
+    background: rgba(255, 255, 255, 0.6);
+    background-image: url("Assets/edge.ico");
+    background-size: 46px;
+    background-position: center 10px;
+    background-repeat: no-repeat;
+}
+
+.ieS:active{
+    background-image: url("Assets/edge.ico");
+    background-size: 38px;
+    background-position: center 15px;
+    background-repeat: no-repeat;
+}
+
+.pyS{
+    background-image: url("Assets/python.ico");
+    background-size: 46px;
+    background-position: center 10px;
+    background-repeat: no-repeat;
+    transition: .1s;
+}
+
+.pyS:hover{
+    background: rgba(255, 255, 255, 0.6);
+    background-image: url("Assets/python.ico");
+    background-size: 46px;
+    background-position: center 10px;
+    background-repeat: no-repeat;
+}
+
+.pyS:active{
+    background-image: url("Assets/python.ico");
+    background-size: 38px;
+    background-position: center 15px;
+    background-repeat: no-repeat;
+}
+
+.search{
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 28px;
+    color: black;
+    outline: none;
+    border: solid 1px #9aa0af;
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    width: calc(100% - 48px);
+    height: 28px
+}
+
+.search:focus{
+    outline: none;
+}

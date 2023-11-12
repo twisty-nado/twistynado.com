@@ -1,13 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twisty Nado</title>
+    <title>Windows 11</title>
+    <script src="winbox.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Assets/windows-ui.min.css">
+    <script src="Assets/windows-ui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://unpkg.com/dragselect@latest/dist/DragSelect.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 </head>
-<body>
-    <video id="video" style="width: 100%; height: 100%; position: absolute; left: 0; top: 0; object-fit: fill; cursor: url('cursor.png'), auto;" onclick="document.getElementById('video').play(); document.getElementById('video').requestFullscreen();">
-        <source src="file.mp4">
-    </video>
+<script>
+    const devMode = false
+
+    function windowClose(id, box) {
+        document.getElementById(id).style.animation = "closeWindow .2s";
+        setTimeout(() => {
+            box.close(true);
+        }, 175);
+    }
+
+    function addTbarButton(id) {
+        var button = document.getElementById("taskbarButton").cloneNode(true)
+        button.id = id + "TaskbarButton"
+        document.getElementById("taskbar").appendChild(button)
+    }
+
+    function time(){
+        const d = new Date();
+        const h = d.getHours()
+        const m = d.getMinutes()
+        const day = d.getDate()
+        const mon = d.getMonth()
+        const y = d.getFullYear()
+
+        if (m >= 10) {
+            document.getElementById("time").innerHTML = h + ":" + m + "<br>" + mon + "/" + day + "/" + y
+        } else{
+            document.getElementById("time").innerHTML = h + ":0" + m + "<br>" + mon + "/" + day + "/" + y
+        }
+    }
+
+    setInterval(() => {
+        time()
+    }, 1000);
+
+    function closeStart(){
+        var start = document.getElementById("start")
+        var sb = document.getElementById("sb")
+        sb.classList.toggle("sbActive")
+        start.style.animation = "closeStart .2s cubic-bezier(.65,.05,.36,1)"
+        setTimeout(() => {
+            start.style.display = "none"
+        }, 175);
+    }
+
+    function openStart(){
+        var start = document.getElementById("start")
+        var sb = document.getElementById("sb")
+
+        if (start.style.display == "block"){
+            closeStart()
+        } else{
+            sb.classList.toggle("sbActive")
+            start.style.display = "block"
+            start.style.animation = "openStart .2s cubic-bezier(.65,.05,.36,1)"
+        }
+        
+    }
+
+    function initializeWindows(){
+        setTimeout(() => {
+            document.getElementById("oobeVideo").style.display = "block"
+            document.getElementById("oobeVideo").play()
+            document.getElementById("oobeVideo").volume = 1; 
+            setTimeout(() => {
+                document.getElementById("oobe").style.display = "none"
+                document.getElementById("windows").style.display = "block"
+            }, 4500);
+        }, 1000);
+    }
+
+    function changeUser(usr){
+        var startUsr = document.getElementById("username")
+        startUsr.innerText = usr
+    }
+
+    function edge() {
+        var box = new WinBox({
+            title: '',
+            url: "Assets/edge.html",
+            x: 'center',
+            y: 'center',
+            width: '960px',
+            height: '540px',
+            minwidth: '640px',
+            minheight: '480px',
+            class: [],
+            onclose: function (force) {
+                return !force && !windowClose(this.id, box);
+            },
+        });
+            box.addControl({
+            index: 0,
+            class: "wb-tab",
+            image: "Assets/tab.png",
+        });
+    }
+
+    function nameWindow(){
+        var box = new WinBox({
+            title: 'Enter a new username',
+            html: '<div style="background-color: #0067b3; position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding-left: 20px; padding-right: 20px; color: white;"><h2>Enter a new username</h2><p>Your username should not have special characters. <br>This will be shown on the Welcome and Start menu.</p><p>Username</p><input id="text" class="app-input-text" type="text" placeholder="Enter username..." style="width: 500px"><br><br><br><button class="app-btn" style="width: 90px; float: right;" onclick="buttons.close()">Cancel</button><button class="app-btn" style="width: 90px; float: right; margin-right: 24px;" onclick="changeUser(text.value), buttons.close()">Next</button></div>',
+            x: 'center',
+            y: 'center',
+            width: '680px',
+            height: '320px',
+            class: ["normalTitle", "lightTitle", "no-resize", "no-max", "no-min", "no-close"],
+            onclose: function (force) {
+                return !force && !windowClose(this.id, box);
+            },
+        })
+        window.buttons = {
+            close: function(){
+                box.close()
+            }
+        }
+    }
+
+    function python(){
+        var box = new WinBox({
+            title: 'Python 3.12',
+            url: 'Assets/python.html',
+            x: 'center',
+            y: 'center',
+            width: '680px',
+            height: '320px',
+            class: ["normalTitle", "lightTitle"],
+            onclose: function (force) {
+                return !force && !windowClose(this.id, box);
+            },
+        })
+        window.buttons = {
+            close: function(){
+                box.close()
+            }
+        }
+    }
+
+    function oobe(){
+        document.getElementById("oobe").style.display = "block"
+        document.getElementById("windows").style.display = "none"
+
+        var box = new WinBox({
+            title: 'Enter a new username',
+            html: '<div style="background-color: #0067b3; position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding-left: 20px; padding-right: 20px; color: white;"><h2>Enter a new username</h2><p>Your username should not have special characters. <br>This will be shown on the Welcome and Start menu.</p><p>Username</p><input id="text" class="app-input-text" type="text" placeholder="Enter username..." style="width: 500px"><br><br><br><button class="app-btn" style="width: 90px; float: right; margin-right: 24px;" onclick="changeUser(text.value), buttons.close()">Next</button></div>',
+            x: 'center',
+            y: 'center',
+            width: '680px',
+            height: '320px',
+            class: ["normalTitle", "lightTitle", "no-resize", "no-max", "no-min", "no-close"],
+            onclose: function (force) {
+                return !force && !windowClose(this.id, box);
+            },
+        })
+        window.buttons = {
+            close: function(){
+                box.close()
+                initializeWindows()
+            }
+        }
+    }
+</script>
+
+<body onload="time(); if (devMode == false) { oobe() }">
+    <div id="oobe">
+        <div class="app-loader-busy animate" style="left: 50%; top: 50%; transform: translate(-50%,-50%); width: 128px; height: 128px; position: absolute; color: white;">
+            <svg viewBox="0 0 16 16"><circle class="app-ldr-busy" cx="8px" cy="8px" r="7px"></circle></svg>
+        </div>
+        <video id="oobeVideo" autoplay>
+            <source src="Assets/start.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div id="windows">
+        <div class="start" id="start">
+            <input type="text" placeholder="   Search for apps, settings and documents" class="search">
+            <div class="pinnedItems">
+                <h4>Pinned</h4>
+                <button class="startItem" onclick="nameWindow(); closeStart()"><br><br><br>Change Username</button>
+                <button class="startItem ieS" onclick="edge(); closeStart()" ><br><br><br>Edge</button>
+                <button class="startItem pyS" onclick="python(); closeStart()" ><br><br><br>Python</button>
+            </div>
+            <div class="startBottom">
+                <button draggable="false" class="userIcon" onclick="nameWindow(); closeStart()"><img src="Assets/user.png" draggable="false" style="width: 32px; height: 32px; border-radius: 100%;">&nbsp<p id="username" style="font-size: 12px; font-family: 'Pixelated MS Sans Serif';">user</p></button>
+                <button draggable="false" class="shutdownButton"></button>
+            </div>
+        </div>
+        <div class="taskbar" id="taskbar">
+            <button class="taskbarButton startButton" onclick="openStart()" id="sb"></button>
+            <button class="taskbarButton ie" onclick="edge()"></button>
+            <button class="taskbarButton py" onclick="python()"></button>
+            <p id="time">69:69<br>9/11/2001</p>
+        </div>
+    </div>
 </body>
+
 </html>

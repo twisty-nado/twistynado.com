@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="windows-ui.min.css">
+    <script src="windows-ui.min.js"></script>
+    <title>edge</title>
+    <style>
+        @font-face {
+            font-family: "font";
+            src: url("segoeuivar.ttf");
+        }
+
+        html, body, nav{
+            background-color: #3b3b3b;
+            margin: 4px;
+            font-family: "font";
+            user-select: none;
+            overflow: hidden;
+        }
+
+        .search{
+            background-color: #2b2b2b;
+            outline: none;
+            border: solid 2px #2b2b2b;
+            color: white;
+            border-radius: 22px;
+            height: 22px;
+            font-family: "font";
+            font-size: 12px;
+            position: relative;
+            top: -3px;
+            left: 16px;
+            width: calc(100% - 254px);
+        }
+
+        .search:focus{
+            outline: none;
+            border: solid 2px #5c9dcf;
+        }
+
+        .div{
+            background-color: #2d2d2d;
+            position: absolute;
+            left: 4px;
+            width: calc(100% - 8px);
+            height: calc(100% - 44px);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="edge-left.png" draggable="false">
+        <input type="search" class="search">
+        <img src="edge-right.png" draggable="false" style="position: relative; top: 3px; left: 30px">
+    </nav>
+    <div class="div"><img src="nowifi.png" draggable="false" style="left: 50%; top: 50%; position: absolute; transform: translate(-50%, -50%) scale(125%); overflow: hidden;"></div>
+</body>
+</html>
