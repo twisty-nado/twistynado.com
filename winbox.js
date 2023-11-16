@@ -353,7 +353,7 @@
         var b = this.g.getElementsByClassName("wb-title")[0];
         a = this.title = a;
         var c = b.firstChild;
-        c ? c.nodeValue = a : b.textContent = a;
+        c ? c.nodeValue = a : b.innerHTML = a;
         return this
     };
     e.setIcon = function(a) {
@@ -434,7 +434,9 @@
         if (!1 === a) return this.restore();
         F && qa();
         this.min && pa(this);
-        this.max || (this.addClass("max").resize(K - this.left - this.right, P - this.top - this.bottom - 48, !0).move(this.left, this.top, !0), this.max = !0, this.onmaximize && this.onmaximize());
+        if (this.checkIfHasClass("disabled-max") == false){
+            this.max || (this.addClass("max").resize(K - this.left - this.right, P - this.top - this.bottom - 48, !0).move(this.left, this.top, !0), this.max = !0, this.onmaximize && this.onmaximize());
+        }
         return this
     };
     e.fullscreen = function(a) {
@@ -499,6 +501,15 @@
     e.removeClass = function(a) {
         this.g.classList.remove(a);
         return this
+    };
+    e.checkIfHasClass = function(a) {
+        var b = false
+        if (this.g.classList.contains(a)){
+            b = true
+        } else {
+            b = false
+        }
+        return b
     };
     e.toggleClass = function(a) {
         return this.g.classList.contains(a) ? this.removeClass(a) : this.addClass(a)

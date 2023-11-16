@@ -60,13 +60,16 @@ body, head, html{
     color-scheme: light;
 }
 
+.winbox:not(.opaqueBody) .wb-body{
+    background: #00000000;
+}
+
 .start{
     overflow: hidden;
 }
 
 :root {
     --PrimaryColor: #0078D7;
-    --PrimaryColorLight: #60CDFF;
 }
 
 .winbox:not(.max) .wb-header {
@@ -133,28 +136,62 @@ body, head, html{
     font-family: "Pixelated MS Sans Serif", Arial;
 }
 
-.winbox:not(.max) .wb-body {
+.winbox:not(.max):not(.no-header):not(.normalTitle) .wb-body {
+    top: 40px;
+    background-color: #00000000;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.winbox:not(.max) .wb-body{
+    top: 30px;
+    background-color: #00000000;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.winbox:not(.focus) .wb-body{
+    background-color: #f0f0f0;
+}
+
+.winbox:not(.focus):not(.max) .wb-body{
+    background-color: #f0f0f0;
+}
+
+.wb-body {
+    top: 24px;
+    margin: 0px;
+    background-color: #00000000;
+    color: black;
+}
+
+.winbox:not(.max):not(.no-header):not(.normalTitle) .wb-body{
+    top: 40px;
+}
+
+.winbox:not(.normalTitle) .wb-header{
+    height: 40px;
+}
+
+.winbox:not(.normalTitle) .wb-body{
+    top: 40px
+}
+
+.winbox:not(.max):not(.no-header) .wb-body{
     top: 30px;
     background-color: #f0f0f0;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
 
-.wb-body {
-    top: 24px;
-    margin: 0px;
-    background-color: #f0f0f0;
-    color: black;
-}
-
-.winbox:not(.max) .wb-body{
-    top: 30px;
-}
-
 .winbox:not(.max) {
     background: rgba(228, 228, 228, 0.9);
     backdrop-filter: blur(64px);
     border-radius: 8px;
+}
+
+.winbox:not(.max) .wb-body{
+    top: 0px
 }
 
 .wb-close {
@@ -165,6 +202,7 @@ body, head, html{
     background-size: 32px;
     margin-right: 0px;
     margin-top: 0px;
+    cursor: default;
     transition: .25s;
 }
 
@@ -234,6 +272,7 @@ body, head, html{
     background-size: 32px;
     margin-right: 0px;
     margin-top: 0px;
+    cursor: default;
     transition: .25s;
 }
 
@@ -245,6 +284,7 @@ body, head, html{
     background-size: 32px;
     margin-right: 0px;
     margin-top: 0px;
+    cursor: default;
     transition: .25s;
 }
 
@@ -291,6 +331,7 @@ body, head, html{
     text-align: center;
     border-top: 1px solid #757575;
     bottom: 0;
+    color: black;
     z-index: 1000000000;
 }
 
@@ -316,6 +357,7 @@ body, head, html{
     width: 100%;
     height: 60px;
     bottom: 0px;
+    color: black;
     left: 0px;
 }
 
@@ -354,6 +396,7 @@ body, head, html{
     cursor: default;
     font-family: "Pixelated MS Sans Serif";
     font-size: 12px;
+    color: black;
     transition: .2s;
 }
 
@@ -467,12 +510,48 @@ body, head, html{
     background-repeat: no-repeat;
 }
 
-.winbox:not(.normalTitle) .wb-header{
-    height: 40px;
+.pb{
+    background-image: url("Assets/ball.png");
+    background-size: 23px;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: .1s;
 }
 
-.winbox:not(.normalTitle) .wb-body{
-    top: 40px;
+.pb:hover{
+    background-image: url("Assets/ball.png");
+    background-size: 23px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.pb:active{
+    background-image: url("Assets/ball.png");
+    background-size: 19px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.ms{
+    background-image: url("Assets/settings.png");
+    background-size: 23px;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: .1s;
+}
+
+.ms:hover{
+    background-image: url("Assets/settings.png");
+    background-size: 23px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.ms:active{
+    background-image: url("Assets/settings.png");
+    background-size: 19px;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .winbox:not(.lightTitle){
@@ -505,6 +584,15 @@ body, head, html{
     background-image: url("Assets/icons/icn_min.png");
 }
 
+.winbox:is(.disabled-max) .wb-max{
+    opacity: .3;
+}
+
+.winbox:is(.disabled-max):hover .wb-max{
+    opacity: .3;
+    background-color: #00000000;
+}
+
 .wb-tab{
     width: 340px;
     height: 33px;
@@ -512,6 +600,23 @@ body, head, html{
     left:12px;
     bottom:0;
     cursor: default;
+}
+
+.wb-backbutton{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left:0px;
+    top:0;
+    cursor: default;
+    z-index: 120;
+    transition: .25s;
+}
+
+.wb-backbutton:hover {
+    background: #adadad2d;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #windows{
@@ -568,7 +673,7 @@ body, head, html{
 .startItem{
     display: inline-block;
     position: relative;
-    width: 100px;
+    width: 90px;
     height: 90px;
     margin-top: 4px;
     background: none;
@@ -582,6 +687,7 @@ body, head, html{
     background-repeat: no-repeat;
     font-size: 12px;
     vertical-align: top;
+    color: black;
     transition: .1s;
 }
 
@@ -622,6 +728,29 @@ body, head, html{
     background-repeat: no-repeat;
 }
 
+.pbS{
+    background-image: url("Assets/ball.png");
+    background-size: 46px;
+    background-position: center 10px;
+    background-repeat: no-repeat;
+    transition: .1s;
+}
+
+.pbS:hover{
+    background: rgba(255, 255, 255, 0.6);
+    background-image: url("Assets/ball.png");
+    background-size: 46px;
+    background-position: center 10px;
+    background-repeat: no-repeat;
+}
+
+.pbS:active{
+    background-image: url("Assets/ball.png");
+    background-size: 38px;
+    background-position: center 15px;
+    background-repeat: no-repeat;
+}
+
 .pyS{
     background-image: url("Assets/python.ico");
     background-size: 46px;
@@ -645,6 +774,29 @@ body, head, html{
     background-repeat: no-repeat;
 }
 
+.msS{
+    background-image: url("Assets/settings.png");
+    background-size: 46px;
+    background-position: center 10px;
+    background-repeat: no-repeat;
+    transition: .1s;
+}
+
+.msS:hover{
+    background: rgba(255, 255, 255, 0.6);
+    background-image: url("Assets/settings.png");
+    background-size: 46px;
+    background-position: center 10px;
+    background-repeat: no-repeat;
+}
+
+.msS:active{
+    background-image: url("Assets/settings.png");
+    background-size: 38px;
+    background-position: center 15px;
+    background-repeat: no-repeat;
+}
+
 .search{
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 28px;
@@ -662,6 +814,41 @@ body, head, html{
     outline: none;
 }
 
+.winbox:not(.normalTitle) .wb-title{
+    height: 40px;
+    line-height: 40px;
+}
+
+.no-header .wb-header{
+    display: none;
+}
+
+.no-header .wb-body{
+    top: 0;
+    border-radius: 6px;
+}
+
+#hidden{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(128px);
+    z-index: 100000000000000000000000000000000000000000000000000000;
+}
+
+.appContainer{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: calc(100% - 280px);
+    height: 100%;
+    padding: 4px;
+}
+
 #bs{
     display: none;
     position: absolute;
@@ -670,5 +857,5 @@ body, head, html{
     width: 100%;
     height: 100%;
     background-color: black;
-    z-index: 100000000000000000000000000000000000000000000000000000;
+    z-index: 100000000000000000000000000000000000000000000000000000000000000000000;
 }

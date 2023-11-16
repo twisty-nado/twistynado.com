@@ -35,7 +35,7 @@
         savedInnerHeight = innerHeight
     }, 500);
 
-    function resize(){
+    function resize() {
 
         if (innerWidth >= savedInnerWidth) {
             var audio = new Audio("Assets/insert.wav")
@@ -54,11 +54,11 @@
         }
     }
 
-    function fullscreen(){
+    function fullscreen() {
         document.documentElement.requestFullscreen();
     }
 
-    function time(){
+    function time() {
         const d = new Date();
         const h = d.getHours()
         const m = d.getMinutes()
@@ -68,7 +68,7 @@
 
         if (m >= 10) {
             document.getElementById("time").innerHTML = h + ":" + m + "<br>" + mon + "/" + day + "/" + y
-        } else{
+        } else {
             document.getElementById("time").innerHTML = h + ":0" + m + "<br>" + mon + "/" + day + "/" + y
         }
     }
@@ -77,35 +77,35 @@
         time()
     }, 1000);
 
-    function closeStart(){
+    function closeStart() {
         var start = document.getElementById("start")
         var sb = document.getElementById("sb")
-        sb.classList.toggle("sbActive")
+        sb.classList.remove("sbActive")
         start.style.animation = "closeStart .2s cubic-bezier(.65,.05,.36,1)"
         setTimeout(() => {
             start.style.display = "none"
         }, 175);
     }
 
-    function openStart(){
+    function openStart() {
         var start = document.getElementById("start")
         var sb = document.getElementById("sb")
 
-        if (start.style.display == "block"){
+        if (start.style.display == "block") {
             closeStart()
-        } else{
-            sb.classList.toggle("sbActive")
+        } else {
+            sb.classList.add("sbActive")
             start.style.display = "block"
             start.style.animation = "openStart .2s cubic-bezier(.65,.05,.36,1)"
         }
-        
+
     }
 
-    function initializeWindows(){
+    function initializeWindows() {
         setTimeout(() => {
             document.getElementById("oobeVideo").style.display = "block"
             document.getElementById("oobeVideo").play()
-            document.getElementById("oobeVideo").volume = 1; 
+            document.getElementById("oobeVideo").volume = 1;
             setTimeout(() => {
                 document.getElementById("oobe").style.display = "none"
                 document.getElementById("windows").style.display = "block"
@@ -113,9 +113,19 @@
         }, 1000);
     }
 
-    function changeUser(usr){
-        var startUsr = document.getElementById("username")
-        startUsr.innerText = usr
+    function changeUser(usr) {
+        var settgUsr = document.getElementById("username")
+        var startUsr = document.getElementById("username2")
+        startUsr.textContent = usr
+        settgUsr.textContent = usr
+    }
+
+    function setAccentColor(hex){
+        if (hex.startsWith("#")){
+            document.documentElement.style.setProperty("--PrimaryColor", hex);
+        } else{
+            document.documentElement.style.setProperty("--PrimaryColor", "#" + hex);
+        }
     }
 
     function edge() {
@@ -128,19 +138,19 @@
             height: '540px',
             minwidth: '640px',
             minheight: '480px',
-            class: [],
+            class: ["opaqueBody"],
             onclose: function (force) {
                 return !force && !windowClose(this.id, box);
             },
         });
-            box.addControl({
+        box.addControl({
             index: 0,
             class: "wb-tab",
             image: "Assets/tab.png",
         });
     }
 
-    function nameWindow(){
+    function nameWindow() {
         var box = new WinBox({
             title: 'Enter a new username',
             html: '<div style="background-color: #0067b3; position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding-left: 20px; padding-right: 20px; color: white;"><h2>Enter a new username</h2><p>Your username should not have special characters. <br>This will be shown on the Welcome and Start menu.</p><p>Username</p><input id="text" class="app-input-text" type="text" placeholder="Enter username..." style="width: 500px"><br><br><br><button class="app-btn" style="width: 90px; float: right;" onclick="buttons.close()">Cancel</button><button class="app-btn" style="width: 90px; float: right; margin-right: 24px;" onclick="changeUser(text.value), buttons.close()">Next</button></div>',
@@ -148,19 +158,39 @@
             y: 'center',
             width: '680px',
             height: '320px',
-            class: ["normalTitle", "lightTitle", "no-resize", "no-max", "no-min", "no-close"],
+            class: ["normalTitle", "lightTitle", "no-resize", "no-max", "no-min", "no-close", "opaqueBody"],
             onclose: function (force) {
                 return !force && !windowClose(this.id, box);
             },
         })
         window.buttons = {
-            close: function(){
+            close: function () {
                 box.close()
             }
         }
     }
 
-    function python(){
+    function settings() {
+        var box = new WinBox({
+            title: '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSettings',
+            mount: document.getElementById("settingsDiv").cloneNode(true),
+            x: 'center',
+            y: 'center',
+            width: '640px',
+            height: '480px',
+            class: ["lightTitle"],
+            onclose: function (force) {
+                return !force && !windowClose(this.id, box);
+            },
+        })
+        box.addControl({
+            index: 0,
+            class: "wb-backbutton",
+            image: "Assets/settings-back-b.png",
+        });
+    }
+
+    function python() {
         var box = new WinBox({
             title: 'Python 3.12',
             url: 'Assets/python.html',
@@ -168,72 +198,194 @@
             y: 'center',
             width: '680px',
             height: '320px',
-            class: ["normalTitle", "lightTitle"],
+            class: ["normalTitle", "lightTitle", "opaqueBody"],
             onclose: function (force) {
                 return !force && !windowClose(this.id, box);
             },
         })
         window.buttons = {
-            close: function(){
+            close: function () {
                 box.close()
             }
         }
     }
 
-    function oobe(){
-        document.getElementById("oobe").style.display = "block"
-        document.getElementById("windows").style.display = "none"
-
+    function accentColorWindow() {
         var box = new WinBox({
-            title: 'Enter a new username',
-            html: '<div style="background-color: #0067b3; position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding-left: 20px; padding-right: 20px; color: white;"><h2>Enter a new username</h2><p>Your username should not have special characters. <br>This will be shown on the Welcome and Start menu.</p><p>Username</p><input id="text" class="app-input-text" type="text" placeholder="Enter username..." style="width: 500px"><br><br><br><button class="app-btn" style="width: 90px; float: right; margin-right: 24px;" onclick="changeUser(text.value), buttons.close()">Next</button></div>',
+            title: 'Enter a new accent color',
+            mount: document.getElementById('accentColorDiv').cloneNode(true),
             x: 'center',
             y: 'center',
             width: '680px',
             height: '320px',
-            class: ["normalTitle", "lightTitle", "no-resize", "no-max", "no-min", "no-close"],
+            class: ["normalTitle", "lightTitle", "opaqueBody"],
             onclose: function (force) {
                 return !force && !windowClose(this.id, box);
             },
         })
         window.buttons = {
-            close: function(){
+            close: function () {
                 box.close()
-                initializeWindows()
+            }
+        }
+    }
+
+    function oobe() {
+        document.getElementById("oobe").style.display = "block"
+        document.getElementById("windows").style.display = "none"
+
+        var box = new WinBox({
+            title: 'Enter a new username',
+            mount: document.getElementById('oobeDiv'),
+            x: 'center',
+            y: 'center',
+            width: '680px',
+            height: '320px',
+            class: ["normalTitle", "opaqueBody", "lightTitle", "no-resize", "no-max", "no-min", "no-close", "no-header"],
+            onclose: function (force) {
+                return !force && !windowClose(this.id, box);
+            },
+        })
+        window.buttons = {
+            close: function () {
+                box.close()
+            }
+        }
+    }
+
+    function balls() {
+        var box = new WinBox({
+            title: 'Pinball',
+            html: '<iframe src="https://rowan-bird.github.io/balls/" style="background-color: #242424"></iframe>',
+            width: '618px',
+            height: '488px',
+            x: 'center',
+            y: 'center',
+            class: ["normalTitle", "no-resize", "disabled-max"],
+            onclose: function (force) {
+                return !force && !windowClose(this.id, box);
+            },
+        })
+        window.buttons = {
+            close: function () {
+                box.close()
             }
         }
     }
 </script>
 
 <body onload="time(); if (devMode == false) { oobe() }" onresize="resize()">
+    <div id="hidden">
+        <div id="accentColorDiv"
+                style="background-color: #0067b3; position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding-left: 20px; padding-right: 20px; color: white;">
+                <h2>Set Accent Color</h2>
+                <p>Set an accent color with a HEX code.</p>
+                <p>HEX Code</p><input id="text" class="app-input-text" type="text" placeholder="#0078D7"
+                    style="width: 85px"><br><br><br><button class="app-btn"
+                    style="width: 90px; float: right; margin-right: 24px;"
+                    onclick="setAccentColor(text.value), buttons.close()">Next</button>
+            </div>
+        <div id="oobeDiv" style="display: block;">
+            <div id="welcomeOOBE"
+                style="background-color: #0067b3; position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding-left: 20px; padding-right: 20px; color: white;">
+                <h2>Welcome to Twisty Nado's Site!</h2>
+                <p>This is a Windows 11 simulation. Press Next to begin!</p><br><br><br><button class="app-btn"
+                    style="width: 90px; float: right; margin-right: 24px;"
+                    onclick="document.getElementById('setUsernameOOBE').style.display = 'block'">Next</button>
+            </div>
+            <div id="setUsernameOOBE"
+                style="background-color: #0067b3; position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding-left: 20px; padding-right: 20px; color: white; display: none">
+                <h2>Enter a new username</h2>
+                <p>Your username should not have special characters. <br>This will be shown on the Welcome and Start
+                    menu.</p>
+                <p>Username</p><input id="text" class="app-input-text" type="text" placeholder="Enter username..."
+                    style="width: 500px"><br><br><br><button class="app-btn"
+                    style="width: 90px; float: right; margin-right: 24px;"
+                    onclick="changeUser(text.value), document.getElementById('setAccentColorOOBE').style.display = 'block'">Next</button>
+            </div>
+            <div id="setAccentColorOOBE"
+                style="background-color: #0067b3; position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding-left: 20px; padding-right: 20px; color: white; display: none">
+                <h2>Set Accent Color</h2>
+                <p>Set an accent color with a HEX code.</p>
+                <p>HEX Code</p><input id="text" class="app-input-text" type="text" placeholder="#0078D7"
+                    style="width: 85px"><br><br><br><button class="app-btn"
+                    style="width: 90px; float: right; margin-right: 24px;"
+                    onclick="setAccentColor(text.value), document.getElementById('yourAllSetOOBE').style.display = 'block'">Next</button>
+            </div>
+            <div id="yourAllSetOOBE"
+                style="background-color: #0067b3; position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding-left: 20px; padding-right: 20px; color: white; display: none">
+                <h2>You're all set!</h2>
+                <p>Thank you for choosing twistynado.com!</p><br><br><br><button class="app-btn"
+                    style="width: 90px; float: right; margin-right: 24px;"
+                    onclick="initializeWindows(), buttons.close()">Next</button>
+            </div>
+        </div>
+        <div id="settingsDiv" style="color: black;">
+            <aside class="app-navbar-wrap" id="NavBarMain" style="background-color: #00000000; height: 100%;">
+                <nav class="app-navbar" style="background-color: #00000000;">
+                  <div class="app-navbar-header" style="background-color: #00000000; display: block; margin: 8px;">
+                    <h3 id="username" class="username" style="margin: 8px;">user</h3>
+                    <input id="text" class="app-input-text" type="text" placeholder="Find a setting" style="width: calc(100% - 16px);">
+                  </div>
+                  <ul class="app-navbar-list" style="background-color: #00000000;">
+                    <li class="app-navbar-list-item">
+                      <a class="active">
+                        <span>System</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </aside>
+            <main class="appContainer">
+                <h2>System</h2>
+                <button class="app-btn"
+                    style="width: calc(100% - 12px); height: 60px; float: left; margin-right: 24px;"
+                    onclick="nameWindow()">Change Username</button>
+                <button class="app-btn"
+                    style="width: calc(100% - 12px); margin-top: 4px; height: 60px; float: left; margin-right: 24px;"
+                    onclick="accentColorWindow()">Change Accent Color</button>
+            </main>
+        </div>
+    </div>
+
     <div id="oobe">
-        <div class="app-loader-busy animate" style="left: 50%; top: 50%; transform: translate(-50%,-50%); width: 128px; height: 128px; position: absolute; color: white;">
-            <svg viewBox="0 0 16 16"><circle class="app-ldr-busy" cx="8px" cy="8px" r="7px"></circle></svg>
+        <div class="app-loader-busy animate"
+            style="z-index: 1;left: 50%; top: 50%; transform: translate(-50%,-50%); width: 128px; height: 128px; position: absolute; color: white;">
+            <svg viewBox="0 0 16 16">
+                <circle class="app-ldr-busy" cx="8px" cy="8px" r="7px"></circle>
+            </svg>
         </div>
         <video id="oobeVideo" autoplay>
             <source src="Assets/start.mp4" type="video/mp4">
         </video>
     </div>
-    <div id="bs"></div>
     <div id="windows">
         <div class="start" id="start">
             <input type="text" placeholder="   Search for apps, settings and documents" class="search">
             <div class="pinnedItems">
                 <h4>Pinned</h4>
                 <button class="startItem" onclick="nameWindow(); closeStart()"><br><br><br>Change Username</button>
-                <button class="startItem ieS" onclick="edge(); closeStart()" ><br><br><br>Edge</button>
-                <button class="startItem pyS" onclick="python(); closeStart()" ><br><br><br>Python</button>
+                <button class="startItem ieS" onclick="edge(); closeStart()"><br><br><br>Edge</button>
+                <button class="startItem pyS" onclick="python(); closeStart()"><br><br><br>Python</button>
+                <button class="startItem msS" onclick="settings(); closeStart()"><br><br><br>Settings</button>
+                <button class="startItem pbS" onclick="balls(); closeStart()"><br><br><br>Pinball</button>
                 <button class="startItem" onclick="fullscreen(); closeStart()"><br><br><br>Fullscreen</button>
             </div>
             <div class="startBottom">
-                <button draggable="false" class="userIcon" onclick="nameWindow(); closeStart()"><img src="Assets/user.png" draggable="false" style="width: 32px; height: 32px; border-radius: 100%;">&nbsp<p id="username" style="font-size: 12px; font-family: 'Pixelated MS Sans Serif';">user</p></button>
+                <button draggable="false" class="userIcon" onclick="nameWindow(); closeStart()"><img
+                        src="Assets/user.png" draggable="false"
+                        style="width: 32px; height: 32px; border-radius: 100%;">&nbsp<p
+                        style="font-size: 12px; font-family: 'Pixelated MS Sans Serif';" id="username2">user</p></button>
                 <button draggable="false" class="shutdownButton"></button>
             </div>
         </div>
+        <div id="bs"></div>
         <div class="taskbar" id="taskbar">
             <button class="taskbarButton startButton" onclick="openStart()" id="sb"></button>
             <button class="taskbarButton ie" onclick="edge()"></button>
             <button class="taskbarButton py" onclick="python()"></button>
+            <button class="taskbarButton ms" onclick="settings()"></button>
+            <button class="taskbarButton pb" onclick="balls()"></button>
             <p id="time">69:69<br>9/11/2001</p>
         </div>
     </div>
