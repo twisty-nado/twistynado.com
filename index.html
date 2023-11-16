@@ -301,7 +301,7 @@
                 <p>Username</p><input id="text" class="app-input-text" type="text" placeholder="Enter username..."
                     style="width: 500px"><br><br><br><button class="app-btn"
                     style="width: 90px; float: right; margin-right: 24px;"
-                    onclick="changeUser(text.value), document.getElementById('setAccentColorOOBE').style.display = 'block'">Next</button>
+                    onclick="changeUser(text.value), document.getElementById('yourAllSetOOBE').style.display = 'block'">Next</button>
             </div>
             <div id="setAccentColorOOBE"
                 style="background-color: #0067b3; position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding-left: 20px; padding-right: 20px; color: white; display: none">
@@ -341,9 +341,9 @@
                 <button class="app-btn"
                     style="width: calc(100% - 12px); height: 60px; float: left; margin-right: 24px;"
                     onclick="nameWindow()">Change Username</button>
-                <button class="app-btn"
+                <!--<button class="app-btn"
                     style="width: calc(100% - 12px); margin-top: 4px; height: 60px; float: left; margin-right: 24px;"
-                    onclick="accentColorWindow()">Change Accent Color</button>
+                    onclick="accentColorWindow()">Change Accent Color</button>-->
             </main>
         </div>
     </div>
@@ -355,10 +355,11 @@
                 <circle class="app-ldr-busy" cx="8px" cy="8px" r="7px"></circle>
             </svg>
         </div>
-        <video id="oobeVideo" autoplay>
+        <video id="oobeVideo" autoplay style="z-index: 10;">
             <source src="Assets/start.mp4" type="video/mp4">
         </video>
     </div>
+    <div id="bs"></div>
     <div id="windows">
         <div class="start" id="start">
             <input type="text" placeholder="   Search for apps, settings and documents" class="search">
@@ -379,7 +380,6 @@
                 <button draggable="false" class="shutdownButton"></button>
             </div>
         </div>
-        <div id="bs"></div>
         <div class="taskbar" id="taskbar">
             <button class="taskbarButton startButton" onclick="openStart()" id="sb"></button>
             <button class="taskbarButton ie" onclick="edge()"></button>
